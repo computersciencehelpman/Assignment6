@@ -23,20 +23,53 @@ public class Assignment6 {
 		String fileName3= "modelX.csv";
 		
 
-	    int totalSalesModel3 = calculateTotalSalesForYear(fileName1, 2016);
-	    int totalSalesModelS = calculateTotalSalesForYear(fileName2, 2016);
-	    int totalSalesModelX = calculateTotalSalesForYear(fileName3, 2016);
+	    int totalSalesModel316 = calculateTotalSalesForYear(fileName1, 16);
+	    int totalSalesModel317 = calculateTotalSalesForYear(fileName1, 17);
+	    int totalSalesModel318 = calculateTotalSalesForYear(fileName1, 18);
+	    int totalSalesModel319 = calculateTotalSalesForYear(fileName1, 19);
+	    
+	    int totalSalesModelS16 = calculateTotalSalesForYear(fileName2, 16);
+	    int totalSalesModelS17 = calculateTotalSalesForYear(fileName2, 17);
+	    int totalSalesModelS18 = calculateTotalSalesForYear(fileName2, 18);
+	    int totalSalesModelS19 = calculateTotalSalesForYear(fileName2, 19);
+	    
+	    int totalSalesModelX16 = calculateTotalSalesForYear(fileName3, 16);
+	    int totalSalesModelX17 = calculateTotalSalesForYear(fileName3, 17);
+	    int totalSalesModelX18 = calculateTotalSalesForYear(fileName3, 18);
+	    int totalSalesModelX19 = calculateTotalSalesForYear(fileName3, 19);
 
-	    System.out.println("Total sales in 2016 for Model 3: " + totalSalesModel3);
-	    System.out.println("Total sales in 2016 for Model S: " + totalSalesModelS);
-	    System.out.println("Total sales in 2016 for Model X: " + totalSalesModelX);
-		
-		ReadFromCSV(fileName1, fileName2, fileName3);
+	    
+	    System.out.println("Model 3 Yearly Sales Report");
+	    System.out.println("---------------------------");
+	    System.out.println("2016 -> " + totalSalesModel316);
+	    System.out.println("2017 -> "+totalSalesModel317);
+	    System.out.println("2018 -> "+totalSalesModel318);
+	    System.out.println("2019 -> "+totalSalesModel319);
+	    System.out.println();
+	    ReadFromCSV1(fileName1);
+	    System.out.println();
+	    System.out.println("Model S Yearly Sales Report");
+	    System.out.println("---------------------------");
+	    System.out.println("2016 -> " + totalSalesModelS16);
+	    System.out.println("2017 -> " + totalSalesModelS17);
+	    System.out.println("2018 -> " + totalSalesModelS18);
+	    System.out.println("2019 -> " + totalSalesModelS19);
+	    System.out.println();
+	    ReadFromCSV2(fileName2);
+	    System.out.println();
+	    System.out.println("model X Yearly Sales Report");
+	    System.out.println("---------------------------");
+	    System.out.println("2016 -> " + totalSalesModelX16);
+	    System.out.println("2017 -> " + totalSalesModelX17);
+	    System.out.println("2018 -> " + totalSalesModelX18);
+	    System.out.println("2019 -> " + totalSalesModelX19);
+	    System.out.println();
+		ReadFromCSV3(fileName3);
 
 	}
 	
 	
-	public static void ReadFromCSV(String fileName1, String fileName2, String fileName3) {
+	public static void ReadFromCSV1(String fileName1) {
 		
 		try(Scanner scanner = new Scanner(new File(fileName1))) {
 			
@@ -73,7 +106,7 @@ public class Assignment6 {
 						                                   .findFirst();
 				
 				//dateWithHighestSale.ifPresent(date -> System.out.println("Highest sale: "+date + " "+highestSaleValue));
-				System.out.println("Model 3");
+				
 				DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM-yy");
 				DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
 				
@@ -121,6 +154,8 @@ public class Assignment6 {
 		catch(IOException e){
 			e.printStackTrace();
 		}
+	}
+	public static void ReadFromCSV2(String fileName2) {
 		try(Scanner scanner = new Scanner(new File(fileName2))){
 		
 			List <String[]> data = new ArrayList<>();
@@ -158,7 +193,7 @@ public class Assignment6 {
 						                                   .findFirst();
 				
 				//dateWithHighestSale.ifPresent(date -> System.out.println("Highest sale: "+date + " "+highestSaleValue));
-				System.out.println("Model S");
+				
 				DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM-yy");
 				DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
 				
@@ -204,7 +239,8 @@ public class Assignment6 {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-		
+	}
+	public static void ReadFromCSV3(String fileName3) {
 	try(Scanner scanner = new Scanner(new File(fileName3))){
 			
 			List <String[]> data = new ArrayList<>();
@@ -240,7 +276,7 @@ public class Assignment6 {
 						                                   .findFirst();
 				
 				//dateWithHighestSale.ifPresent(date -> System.out.println("Highest sale: "+date + " "+highestSaleValue));
-				System.out.println("model X");
+				
 				DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM-yy");
 				DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
 				
@@ -291,9 +327,10 @@ public class Assignment6 {
 		
 	}
 
+
 	public static int calculateTotalSalesForYear(String fileName, int year) {
-	    int totalSales = 0;
-	    
+	    int totalSales =0;
+	 
 	    Map<String, Integer> monthMap = new HashMap<>();
 	    monthMap.put("Jan", 1);
 	    monthMap.put("Feb", 2);
@@ -309,7 +346,10 @@ public class Assignment6 {
 	    monthMap.put("Dec", 12);
 	    
 	    try (Scanner scanner = new Scanner(new File(fileName))) {
-	        // Skip the header line
+	       
+	    
+	    	
+	    	// Skip the header line
 	        if (scanner.hasNextLine()) {
 	            scanner.nextLine();
 	        }
@@ -318,21 +358,23 @@ public class Assignment6 {
 	            String line = scanner.nextLine();
 	            String[] data = line.split(",");
 	            String[] dateParts = data[0].split("-");
-	            
+	            int sales = Integer.parseInt(data[1]);
 	            // Ensure dateParts has at least two elements
-	            if (dateParts.length == 2) {
+	            if (dateParts.length == 2) { 
 	                try {
 	                   // int salesYear = Integer.parseInt(dateParts[0]);
-	                   
+	                	 
 	                	//Extract month and year components
 	                	String monthName = dateParts[0];
 	                	int salesYear = Integer.parseInt(dateParts[1]);
-	                	
+	                	 
 	                	//Convert month name to numeric value
 	                	int monthValue = monthMap.get(monthName);
-	                	
+	                	 
 	                	if (salesYear == year) {
-	                        totalSales += Integer.parseInt(data[1]);
+	                		 
+	                        totalSales += sales;
+	                       
 	                    }
 	                } catch (NumberFormatException e) {
 	                    System.err.println("Invalid sales value: " + data[1]);
@@ -341,12 +383,14 @@ public class Assignment6 {
 	            } else {
 	                System.err.println("Invalid date format: " + data[0]);
 	                // Handle or log the invalid date format as needed
+	                
 	            }
+	         
 	        }
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
-	    return totalSales;
+	     return totalSales; 
 	}
 
 
